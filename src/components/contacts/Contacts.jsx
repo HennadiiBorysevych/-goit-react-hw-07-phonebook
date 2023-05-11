@@ -1,8 +1,9 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { fetchContacts, deleteContact } from '../../redux/ContactsOperations';
-import { selectContacts, selectFilter } from '../../redux/Selectors';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  fetchContacts,
+  deleteContact,
+} from '../../redux/Contacts/ContactsOperations';
 import Notification from './notafication/Notafication';
 import {
   ContactsContainer,
@@ -10,11 +11,11 @@ import {
   ContactsItem,
   Button,
 } from './Contacts.styled';
+import { UseSelectors } from 'hooks/UseSelectors';
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
+  const [contacts, filter] = UseSelectors();
 
   useEffect(() => {
     dispatch(fetchContacts());
